@@ -179,7 +179,7 @@ void	movement(t_game	*my_game, int new_x, int new_y)
 		exit(0);
 	}
 	if(my_game->map[new_y][new_x] == 'E' && my_game->collectibles_score)
-		ft_perror("Loser 🗡️\n", NULL, NULL);
+		ft_perror("Loser 😔🗡️\n", NULL, NULL);
 	if(my_game->map[new_y][new_x] != '1' && my_game->map[new_y][new_x] != 'E')
 	{
 		if(my_game->map[new_y][new_x] == 'C')
