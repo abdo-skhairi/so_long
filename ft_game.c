@@ -14,6 +14,29 @@ void ft_delete_textures(t_game *my_game)
 		mlx_delete_texture(my_game->space_texture);
 }
 
+void ft_delete_images(mlx_t *mlx, t_game *my_game)
+{
+	int i;
+
+    if (!mlx || !my_game)
+        return;
+    mlx_image_t **images[] = {
+        &my_game->player_img, &my_game->wall_img,
+        &my_game->collectible_img, &my_game->exit_img,
+        &my_game->space_img, NULL
+    };
+    i = 0;
+    while (images[i])
+    {
+        if (*images[i])
+        {
+            mlx_delete_image(mlx, *images[i]);
+            *images[i] = NULL;
+        }
+        i++;
+    }
+}
+
 void    ft_calculate_dimensions(t_game *my_game, int *width, int *height, char **map)
 {
 	while(map[(*height)])
@@ -56,46 +79,48 @@ void    ft_get_images(t_game   *my_game)
 {
 	my_game->player_img = mlx_texture_to_image(my_game->mlx, my_game->player_texture);
 	if(!(my_game->player_img))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->wall_img = mlx_texture_to_image(my_game->mlx, my_game->wall_texture);
 	if(!(my_game->wall_img))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->collectible_img = mlx_texture_to_image(my_game->mlx, my_game->collectible_texture);
 	if(!(my_game->collectible_img))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->exit_img = mlx_texture_to_image(my_game->mlx, my_game->exit_texture);
 	if(!(my_game->exit_img))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->space_img = mlx_texture_to_image(my_game->mlx, my_game->space_texture);
 	if(!(my_game->space_img))
-		ft_perror("error", NULL, NULL);
-	ft_delete_textures(my_game);
+		ft_perror("Error\n", NULL, NULL);
 }
 
 void    ft_get_textures_and_images(t_game  *my_game)
 {
 	my_game->player_texture = mlx_load_png("images/player.png");
 	if(!(my_game->player_texture))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->wall_texture = mlx_load_png("images/wall.png");
 	if(!(my_game->wall_texture))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->collectible_texture = mlx_load_png("images/collectible.png");
 	if(!(my_game->collectible_texture))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->exit_texture = mlx_load_png("images/exit.png");
 	if(!(my_game->exit_texture))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	my_game->space_texture = mlx_load_png("images/space.png");
 	if(!(my_game->space_texture))
-		ft_perror("error", NULL, NULL);
+		ft_perror("Error\n", NULL, NULL);
 	ft_get_images(my_game);
 }
 
 void    ft_init_game(t_game    *my_game, char **map)
 {
-	int width = 0;
-	int height = 0;
+	int width;
+	int height;
+
+	width = 0;
+	height = 0;
 	ft_calculate_dimensions(my_game, &width, &height, map);
 	my_game->map = map;
 	my_game->moves_counter = 0;
@@ -104,6 +129,7 @@ void    ft_init_game(t_game    *my_game, char **map)
 		ft_perror("game_error", NULL, NULL);
 	ft_get_textures_and_images(my_game);
 }
+
 void	ft_put_numbr(int n)
 {
 	char	c;
@@ -124,10 +150,10 @@ int	count_collectibles(t_game	*my_game)
 	int j;
 	int counter;
 	
-	map = my_game->map;
 	i = 0;
 	j = 0;
 	counter = 0;
+	map = my_game->map;
 	while(map[i])
 	{
 		j = 0;
@@ -142,18 +168,16 @@ int	count_collectibles(t_game	*my_game)
 	return(counter);
 }
 
-int	*player_x_y(t_game *my_game, char	**map)
+int	*player_x_y(t_game *my_game)
 {
-	(void)map;
-	int *positions;
-	int i;
-	int j;
-	
+	int	*positions;
+	int	i;
+	int	j;
+
 	positions = malloc(sizeof(int) * 2);
 	if(!positions)
-	return(NULL);
+		return(NULL);
 	i = 0;
-	j = 0;
 	while(i < my_game->height)
 	{
 		j = 0;
@@ -163,29 +187,58 @@ int	*player_x_y(t_game *my_game, char	**map)
 			{
 				positions[0] = j;
 				positions[1] = i;
+				return(positions);
 			}
 			j++;
 		}
 		i++;
 	}
-	return(positions);
+	free(positions);
+	return(NULL);
 }
 
-void	movement(t_game	*my_game, int new_x, int new_y)
+void	free_the_map(char **map)
+{
+	int i = 0;
+	if (map)
+	{
+		while (map[i])
+		{
+			free(map[i]);
+			map[i] = NULL;
+			i++;
+		}
+		free(map);
+	}
+}
+
+void	free_all_and_exit(t_game *my_game, int **p_position)
+{
+	ft_delete_images(my_game->mlx, my_game);
+	free_the_map(my_game->map);
+	if(*p_position)
+	{
+		free(*p_position);
+		*p_position = NULL;
+	}
+	mlx_terminate(my_game->mlx);
+	exit(0);
+}
+
+void	movement(t_game	*my_game, int new_x, int new_y, int **p_position)
 {
 	if(my_game->map[new_y][new_x] == 'E' && !my_game->collectibles_score)
 	{
 		write(1, "congratulation you win🎉🥳🎊🎁\n", 40);
+		free_all_and_exit(my_game, p_position);
 		exit(0);
 	}
-	if(my_game->map[new_y][new_x] == 'E' && my_game->collectibles_score)
-		ft_perror("Loser 😔🗡️\n", NULL, NULL);
 	if(my_game->map[new_y][new_x] != '1' && my_game->map[new_y][new_x] != 'E')
 	{
 		if(my_game->map[new_y][new_x] == 'C')
 			(my_game->collectibles_score)--;
-		mlx_image_to_window(my_game->mlx, my_game->space_img, my_game->player_x * 64, my_game->player_y * 64); //put in the old x and y space image
-		mlx_image_to_window(my_game->mlx, my_game->player_img, new_x*64, new_y*64); //put int new_x and new_y a player image
+		mlx_image_to_window(my_game->mlx, my_game->space_img, my_game->player_x * 64, my_game->player_y * 64);
+		mlx_image_to_window(my_game->mlx, my_game->player_img, new_x*64, new_y*64);
 		my_game->map[my_game->player_y][my_game->player_x] = '0';
 		my_game->map[new_y][new_x] = 'P';
 		my_game->moves_counter++;
@@ -204,27 +257,24 @@ void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game)
 	int		*p_position;
 
 	my_game = (t_game *)ptr_to_my_game;
-	p_position = player_x_y(my_game, my_game->map);
+	p_position = player_x_y(my_game);
 	my_game->player_x = p_position[0];
 	my_game->player_y = p_position[1];
 	my_game->collectibles_score = count_collectibles(my_game);
 	if(key_presed.action)
 	{
 		if(key_presed.key == MLX_KEY_RIGHT || key_presed.key == MLX_KEY_D)
-			movement(my_game, my_game->player_x + 1, my_game->player_y);
+			movement(my_game, my_game->player_x + 1, my_game->player_y, &p_position);
 		else if(key_presed.key == MLX_KEY_LEFT || key_presed.key == MLX_KEY_A)
-			movement(my_game, my_game->player_x - 1, my_game->player_y);
+			movement(my_game, my_game->player_x - 1, my_game->player_y, &p_position);
 		else if(key_presed.key == MLX_KEY_UP || key_presed.key == MLX_KEY_W)
-			movement(my_game, my_game->player_x, my_game->player_y - 1);
+			movement(my_game, my_game->player_x, my_game->player_y - 1, &p_position);
 		else if(key_presed.key == MLX_KEY_DOWN || key_presed.key == MLX_KEY_S)
-			movement(my_game, my_game->player_x, my_game->player_y + 1);
+			movement(my_game, my_game->player_x, my_game->player_y + 1, &p_position);
 		else if(key_presed.key == MLX_KEY_ESCAPE)
-		{
-			// free_stuct(my_game);
-			exit(1);
-		}
+			free_all_and_exit(my_game, &p_position);
 	}
-	free(p_position);
+
 }
 
 void    ft_game(char    **map)
@@ -235,4 +285,6 @@ void    ft_game(char    **map)
 	ft_set_images(&my_game);
 	mlx_key_hook(my_game.mlx, &handler, &my_game);
 	mlx_loop(my_game.mlx);
+	ft_delete_images(my_game.mlx, &my_game);
+	mlx_terminate(my_game.mlx);
 }

@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#define MAX_LINES 1000
+#define MAX_LINES 2
 
 #include "./MLX42/include/MLX42/MLX42.h"
 #include "get_next_line_bonus.h"
@@ -46,5 +46,10 @@ void    validate_map(char **map);
 void    ft_game(char **map);
 void    init_game(t_game    *my_game, char **map);
 void    calculate_dementions(int *width, int *height, char **map);
+void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game);
+void	free_the_map(char **map);
+void	ft_put_numbr(int n);
+
+
 
 #endif
