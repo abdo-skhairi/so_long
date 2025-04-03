@@ -1,21 +1,5 @@
 #include "so_long.h"
 
-void	ft_init_game(t_game	*my_game, char	**map)
-{
-	int	width;
-	int	height;
-
-	width = 0;
-	height = 0;
-	ft_calculate_dimensions(my_game, &width, &height, map);
-	my_game->map = map;
-	my_game->moves_counter = 0;
-	my_game->mlx = mlx_init(width * 64, height * 64, "so_long", 1);
-	if (!(my_game->mlx))
-		ft_perror("game_error", NULL, NULL, 0);
-	ft_get_textures_and_images(my_game);
-}
-
 void	movement(t_game	*my_game, int new_x, int new_y, int **p_position)
 {
 	my_game->collectibles_score = count_collectibles(my_game->map);
@@ -71,6 +55,22 @@ void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game)
 		else if (key_presed.key == MLX_KEY_ESCAPE)
 			free_all_and_exit(my_game, &p_position);
 	}
+}
+
+void	ft_init_game(t_game	*my_game, char	**map)
+{
+	int	width;
+	int	height;
+
+	width = 0;
+	height = 0;
+	ft_calculate_dimensions(my_game, &width, &height, map);
+	my_game->map = map;
+	my_game->moves_counter = 0;
+	my_game->mlx = mlx_init(width * 64, height * 64, "so_long", 1);
+	if (!(my_game->mlx))
+		ft_perror("game_error", NULL, NULL, 0);
+	ft_get_textures_and_images(my_game);
 }
 
 void	ft_game(char	**map)
