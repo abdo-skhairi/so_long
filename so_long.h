@@ -1,16 +1,16 @@
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
-#define MAX_LINES 2
+# define MAX_LINES 2
 
-#include "./MLX42/include/MLX42/MLX42.h"
-#include "get_next_line_bonus.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include<stdio.h>
+# include "./MLX42/include/MLX42/MLX42.h"
+# include "get_next_line_bonus.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
-typedef struct  s_game
+typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_texture_t	*player_texture;
@@ -32,24 +32,49 @@ typedef struct  s_game
 	int				moves_counter;
 }	t_game;
 
-void	ft_perror(char *error_string, char **map, char *content);
+typedef struct w_and_h
+{
+	int	w;
+	int	h;
+}	t_demnsions;
+
 void	check_file_name(char *file_name);
-char    **read_map(char *path_name);
-int     validate_map_elements(char **map);
-void    check_lines_len(char **map);
-void    validate_map_borders(char **map);
-void    player_position(char **map, int *x, int *y, int height, int width);
-void    flood_fill(char **map, int x, int y, int height, int width);
-void    check_if_still_exit_or_coins(char **map, int height, int width);
-void    validate_player_moves(char **map, int height, int width);
-void    validate_map(char **map);
-void    ft_game(char **map);
-void    init_game(t_game    *my_game, char **map);
-void    calculate_dementions(int *width, int *height, char **map);
-void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game);
+void	check_lines_len(char **map);
+void	check_if_still_exit_or_coins(char **map, int height, int width);
+int		cheaker(char charcter, int *e, int *p, int *c);
+
+char	**read_map(char *path_name);
+int		validate_map_elements(char **map);
+void	validate_map_borders(char **map);
+void	validate_player_moves(char **map, int height, int width);
+void	validate_map_borders(char	**map);
+void	validate_map(char	**map);
+
+void	player_position(char	**map, int *x, int *y, t_demnsions	*w_h);
+void	flood_fill(char	**map, int x, int y, t_demnsions	*w_h);
 void	free_the_map(char **map);
 void	ft_put_numbr(int n);
+int		*player_x_y(t_game *my_game);
+int		ft_open(char	*path_name);
 
+void	ft_game(char **map);
+void	init_game(t_game	*my_game, char **map);
+void	ft_get_textures_and_images(t_game	*my_game);
+void	ft_set_images(t_game	*my_game);
+int		map_len_for_malloc(char *path_name);
+void	ft_get_images(t_game	*my_game);
+void	ft_delete_images(mlx_t	*mlx, t_game	*my_game);
+void	ft_delete_textures(t_game	*my_game);
 
+void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game);
+void	movement(t_game	*my_game, int new_x, int new_y, int **p_position);
+
+void	ft_calculate_dimensions(t_game *my_game, int *width, int *height,
+			char **map);
+
+int		count_collectibles(char **map);
+void	free_all_and_exit(t_game *my_game, int **p_position);
+
+void	ft_perror(char	*error_string, char	**map, char	*content, int fd);
 
 #endif
