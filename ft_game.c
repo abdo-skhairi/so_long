@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_game.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 20:47:52 by sabderra          #+#    #+#             */
+/*   Updated: 2025/04/03 20:50:02 by sabderra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void	movement(t_game	*my_game, int new_x, int new_y, t_xy	*position)
+void	movement(t_game	*my_game, int new_x, int new_y)
 {
-	(void)position;
 	my_game->collectibles_score = count_collectibles(my_game->map);
 	if (my_game->map[new_y][new_x] == 'E' && !my_game->collectibles_score)
 	{
 		write(1, "congratulation you win🎉🥳🎊🎁\n", 40);
-		free_all_and_exit(my_game, NULL);
+		free_all_and_exit(my_game);
 		exit(0);
 	}
 	if (my_game->map[new_y][new_x] != '1' && my_game->map[new_y][new_x] != 'E')
@@ -43,18 +54,18 @@ void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game)
 	{
 		if (key_presed.key == MLX_KEY_RIGHT || key_presed.key == MLX_KEY_D)
 			movement(my_game, my_game->player_x + 1,
-				my_game->player_y, NULL);
+				my_game->player_y);
 		else if (key_presed.key == MLX_KEY_LEFT || key_presed.key == MLX_KEY_A)
 			movement(my_game, my_game->player_x - 1,
-				my_game->player_y, NULL);
+				my_game->player_y);
 		else if (key_presed.key == MLX_KEY_UP || key_presed.key == MLX_KEY_W)
 			movement(my_game, my_game->player_x,
-				my_game->player_y - 1, NULL);
+				my_game->player_y - 1);
 		else if (key_presed.key == MLX_KEY_DOWN || key_presed.key == MLX_KEY_S)
 			movement(my_game, my_game->player_x,
-				my_game->player_y + 1, NULL);
+				my_game->player_y + 1);
 		else if (key_presed.key == MLX_KEY_ESCAPE)
-			free_all_and_exit(my_game, NULL);
+			free_all_and_exit(my_game);
 	}
 }
 

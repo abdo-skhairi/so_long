@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 20:48:31 by sabderra          #+#    #+#             */
+/*   Updated: 2025/04/03 20:54:03 by sabderra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	**read_map(char *path_name)
@@ -61,9 +73,9 @@ void	ll(void)
 
 int	main(int ac, char	**av)
 {
-	atexit(ll);
 	char	**map;
 
+	atexit(ll);
 	map = NULL;
 	if (ac != 2)
 		ft_perror("Error\n./so_long <map_path_file>\n", NULL, NULL, 0);

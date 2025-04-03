@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 20:48:38 by sabderra          #+#    #+#             */
+/*   Updated: 2025/04/03 20:50:45 by sabderra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -40,8 +52,8 @@ typedef struct w_and_h
 
 typedef struct x_and_y
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }	t_xy;
 
 void	check_file_name(char *file_name);
@@ -74,13 +86,13 @@ void	ft_delete_images(mlx_t	*mlx, t_game	*my_game);
 void	ft_delete_textures(t_game	*my_game);
 
 void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game);
-void	movement(t_game	*my_game, int new_x, int new_y, t_xy	*p_position);
+void	movement(t_game	*my_game, int new_x, int new_y);
 
 void	ft_calculate_dimensions(t_game *my_game, int *width, int *height,
 			char **map);
 
 int		count_collectibles(char **map);
-t_xy	*free_all_and_exit(t_game	*my_game, t_xy	*p_position);
+t_xy	*free_all_and_exit(t_game	*my_game);
 
 void	ft_perror(char	*error_string, char	**map, char	*content, int fd);
 void	print_map(char **map);

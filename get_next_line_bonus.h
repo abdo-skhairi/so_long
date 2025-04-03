@@ -6,7 +6,7 @@
 /*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:14:40 by sabderra          #+#    #+#             */
-/*   Updated: 2025/04/03 18:05:44 by sabderra         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:52:11 by sabderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # endif
 
 # ifndef OPEN_MAX
-# define OPEN_MAX 1024
+#  define OPEN_MAX 1024
 # endif
 
 char	*ft_strdup(char *s1);

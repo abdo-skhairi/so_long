@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphic_tools.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 20:48:25 by sabderra          #+#    #+#             */
+/*   Updated: 2025/04/03 20:51:18 by sabderra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	ft_calculate_dimensions(t_game	*my_game, int *width, int *height,
@@ -66,8 +78,8 @@ t_xy	*player_x_y(t_game	*my_game)
 {
 	t_xy	positions;
 	t_xy	*hald;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < my_game->height)
