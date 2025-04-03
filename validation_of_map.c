@@ -28,7 +28,6 @@ int	validate_map_elements(char	**map)
 		j = 0;
 		while (map[i][j])
 		{
-			cheaker(map[i][j], &e, &p, &c);
 			if (cheaker(map[i][j], &e, &p, &c) == -1)
 				ft_perror("Error\nInvalid character\n", map, NULL, 0);
 			j++;

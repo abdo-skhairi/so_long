@@ -1,31 +1,5 @@
 #include "so_long.h"
 
-void	ft_perror(char	*error_string, char	**map, char	*content, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (map)
-	{
-		while (map[i])
-		{
-			free(map[i]);
-			map[i] = NULL;
-			i++;
-		}
-		free(map);
-	}
-	if (content)
-	{
-		free(content);
-		content = NULL;
-	}
-	if (fd)
-		close(fd);
-	write(2, error_string, ft_strlen(error_string));
-	exit(1);
-}
-
 void	check_file_name(char	*file_name)
 {
 	int		i;

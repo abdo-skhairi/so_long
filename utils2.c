@@ -63,4 +63,3 @@ void	flood_fill(char	**map, int x, int y, t_demnsions	*w_h)
 	flood_fill(map, x, y - 1, w_h);
 	flood_fill(map, x, y + 1, w_h);
 }
-

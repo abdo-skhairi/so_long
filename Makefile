@@ -4,7 +4,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lmlx42 -lm -lX11 -lXext -pthread -lglfw
 
-SRCS = so_long.c get_next_line_bonus.c get_next_line_utils_bonus.c ft_game.c
+SRCS = so_long.c get_next_line_bonus.c get_next_line_utils_bonus.c ft_game.c utils1.c utils2.c validation_of_map.c \
+		delete_get_funs.c free.c graphic_tools.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
