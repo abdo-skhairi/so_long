@@ -62,15 +62,13 @@ void	ft_put_numbr(int n)
 	write(1, &c, 1);
 }
 
-int	*player_x_y(t_game	*my_game)
+t_xy	*player_x_y(t_game	*my_game)
 {
-	int	*positions;
+	t_xy	positions;
+	t_xy	*hald;
 	int	i;
 	int	j;
 
-	positions = malloc(sizeof(int) * 2);
-	if (!positions)
-		return (NULL);
 	i = 0;
 	while (i < my_game->height)
 	{
@@ -79,14 +77,14 @@ int	*player_x_y(t_game	*my_game)
 		{
 			if (my_game->map[i][j] == 'P')
 			{
-				positions[0] = j;
-				positions[1] = i;
-				return (positions);
+				positions.x = j;
+				positions.y = i;
+				hald = &positions;
+				return (hald);
 			}
 			j++;
 		}
 		i++;
 	}
-	free(positions);
 	return (NULL);
 }

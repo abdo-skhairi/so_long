@@ -100,7 +100,7 @@ void	validate_player_moves(char	**map, int height, int width)
 	w_and_h.h = height;
 	map_copy = malloc(sizeof(char *) * (height + 1));
 	if (!map_copy)
-		ft_perror("Error\nAllocation failed for map copy\n", map, NULL, 0);
+		ft_perror("Error\nAllocation failed for map copy\n", NULL, NULL, 0);
 	while (i < height)
 	{
 		map_copy[i] = ft_strdup(map[i]);

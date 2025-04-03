@@ -1,12 +1,13 @@
 #include "so_long.h"
 
-void	movement(t_game	*my_game, int new_x, int new_y, int **p_position)
+void	movement(t_game	*my_game, int new_x, int new_y, t_xy	*position)
 {
+	(void)position;
 	my_game->collectibles_score = count_collectibles(my_game->map);
 	if (my_game->map[new_y][new_x] == 'E' && !my_game->collectibles_score)
 	{
 		write(1, "congratulation you win🎉🥳🎊🎁\n", 40);
-		free_all_and_exit(my_game, p_position);
+		free_all_and_exit(my_game, NULL);
 		exit(0);
 	}
 	if (my_game->map[new_y][new_x] != '1' && my_game->map[new_y][new_x] != 'E')
@@ -32,28 +33,28 @@ void	movement(t_game	*my_game, int new_x, int new_y, int **p_position)
 void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game)
 {
 	t_game	*my_game;
-	int		*p_position;
+	t_xy	*position;
 
 	my_game = (t_game *)ptr_to_my_game;
-	p_position = player_x_y(my_game);
-	my_game->player_x = p_position[0];
-	my_game->player_y = p_position[1];
+	position = player_x_y(my_game);
+	my_game->player_x = position->x;
+	my_game->player_y = position->y;
 	if (key_presed.action)
 	{
 		if (key_presed.key == MLX_KEY_RIGHT || key_presed.key == MLX_KEY_D)
 			movement(my_game, my_game->player_x + 1,
-				my_game->player_y, &p_position);
+				my_game->player_y, NULL);
 		else if (key_presed.key == MLX_KEY_LEFT || key_presed.key == MLX_KEY_A)
 			movement(my_game, my_game->player_x - 1,
-				my_game->player_y, &p_position);
+				my_game->player_y, NULL);
 		else if (key_presed.key == MLX_KEY_UP || key_presed.key == MLX_KEY_W)
 			movement(my_game, my_game->player_x,
-				my_game->player_y - 1, &p_position);
+				my_game->player_y - 1, NULL);
 		else if (key_presed.key == MLX_KEY_DOWN || key_presed.key == MLX_KEY_S)
 			movement(my_game, my_game->player_x,
-				my_game->player_y + 1, &p_position);
+				my_game->player_y + 1, NULL);
 		else if (key_presed.key == MLX_KEY_ESCAPE)
-			free_all_and_exit(my_game, &p_position);
+			free_all_and_exit(my_game, NULL);
 	}
 }
 

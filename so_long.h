@@ -3,7 +3,7 @@
 
 # define MAX_LINES 2
 
-# include "./MLX42/include/MLX42/MLX42.h"
+# include "/Users/sabderra/Desktop/MLX42/include/MLX42/MLX42.h"
 # include "get_next_line_bonus.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -38,6 +38,12 @@ typedef struct w_and_h
 	int	h;
 }	t_demnsions;
 
+typedef struct x_and_y
+{
+	int x;
+	int y;
+}	t_xy;
+
 void	check_file_name(char *file_name);
 void	check_lines_len(char **map);
 void	check_if_still_exit_or_coins(char **map, int height, int width);
@@ -55,7 +61,7 @@ void	player_position(char	**map, int *x, int *y, t_demnsions	*w_h);
 void	flood_fill(char	**map, int x, int y, t_demnsions	*w_h);
 void	free_the_map(char **map);
 void	ft_put_numbr(int n);
-int		*player_x_y(t_game *my_game);
+t_xy	*player_x_y(t_game	*my_game);
 int		ft_open(char	*path_name);
 
 void	ft_game(char **map);
@@ -68,13 +74,13 @@ void	ft_delete_images(mlx_t	*mlx, t_game	*my_game);
 void	ft_delete_textures(t_game	*my_game);
 
 void	handler(mlx_key_data_t	key_presed, void	*ptr_to_my_game);
-void	movement(t_game	*my_game, int new_x, int new_y, int **p_position);
+void	movement(t_game	*my_game, int new_x, int new_y, t_xy	*p_position);
 
 void	ft_calculate_dimensions(t_game *my_game, int *width, int *height,
 			char **map);
 
 int		count_collectibles(char **map);
-void	free_all_and_exit(t_game *my_game, int **p_position);
+t_xy	*free_all_and_exit(t_game	*my_game, t_xy	*p_position);
 
 void	ft_perror(char	*error_string, char	**map, char	*content, int fd);
 void	print_map(char **map);

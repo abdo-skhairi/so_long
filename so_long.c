@@ -54,8 +54,14 @@ void	check_if_still_exit_or_coins(char	**map, int height, int width)
 	}
 }
 
+void	ll(void)
+{
+	system("leaks so_long");
+}
+
 int	main(int ac, char	**av)
 {
+	atexit(ll);
 	char	**map;
 
 	map = NULL;

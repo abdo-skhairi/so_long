@@ -83,4 +83,5 @@ void	ft_get_textures_and_images(t_game	*my_game)
 	if (!(my_game->space_texture))
 		ft_perror("Error\n", NULL, NULL, 0);
 	ft_get_images(my_game);
+	ft_delete_textures(my_game);
 }

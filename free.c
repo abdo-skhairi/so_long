@@ -17,14 +17,14 @@ void	free_the_map(char	**map)
 	}
 }
 
-void	free_all_and_exit(t_game	*my_game, int	**p_position)
+t_xy	*free_all_and_exit(t_game	*my_game, t_xy	*p_position)
 {
 	ft_delete_images(my_game->mlx, my_game);
 	free_the_map(my_game->map);
-	if (*p_position)
+	if (p_position || p_position)
 	{
-		free(*p_position);
-		*p_position = NULL;
+		free(p_position);
+		p_position = NULL;
 	}
 	mlx_terminate(my_game->mlx);
 	exit(0);
@@ -44,6 +44,7 @@ void	ft_perror(char	*error_string, char	**map, char	*content, int fd)
 			i++;
 		}
 		free(map);
+		map = NULL;
 	}
 	if (content)
 	{

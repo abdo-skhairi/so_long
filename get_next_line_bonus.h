@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdo <abdo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:14:40 by sabderra          #+#    #+#             */
-/*   Updated: 2025/04/03 10:48:01 by abdo             ###   ########.fr       */
+/*   Updated: 2025/04/03 18:05:44 by sabderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 #  define BUFFER_SIZE 12
 # endif
 
+# ifndef OPEN_MAX
 # define OPEN_MAX 1024
+# endif
 
 char	*ft_strdup(char *s1);
 char	*get_next_line(int fd);
