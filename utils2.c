@@ -51,8 +51,38 @@ int	count_collectibles(char **map)
 	return (counter);
 }
 
+void	check_if_exit_block_map(char	**map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (!count_collectibles(map))
+	{
+		while (map[i])
+		{
+			j = 0;
+			while (map[i][j])
+			{
+				if (map[i][j] == 'E')
+				{
+					if (map[i + 1][j] == 'V' || map[i - 1][j] == 'V'
+						|| map[i][j + 1] == 'V' || map[i][j - 1] == 'V')
+					{
+						map[i][j] = 'V';
+					}
+				}
+				j++;
+			}
+			i++;
+		}
+	}
+}
+
 void	flood_fill(char	**map, int x, int y, t_demnsions	*w_h)
 {
+	check_if_exit_block_map(map);
 	if (x < 0 || y < 0 || x >= w_h->w || y >= w_h->h
 		|| map[y][x] == '1' || map[y][x] == 'V'
 		|| (map[y][x] == 'E' && count_collectibles(map)))

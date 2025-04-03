@@ -39,7 +39,9 @@ void	check_if_still_exit_or_coins(char	**map, int height, int width)
 		j = 0;
 		while (j < width)
 		{
-			if (map[i][j] == 'C' || map[i][j] == 'E')
+			if (map[i][j] == 'E' && !count_collectibles(map))
+				ft_perror("Error\n", map, NULL, 0);
+			if (map[i][j] == 'C')
 				ft_perror("Error\nInvalid map, unreachable exit or coins\n",
 					map, NULL, 0);
 			else if (map[i][j] == 'E' && map[i][j + 1] == '1'

@@ -42,6 +42,7 @@ void	check_file_name(char *file_name);
 void	check_lines_len(char **map);
 void	check_if_still_exit_or_coins(char **map, int height, int width);
 int		cheaker(char charcter, int *e, int *p, int *c);
+void	check_if_exit_block_map(char **map);
 
 char	**read_map(char *path_name);
 int		validate_map_elements(char **map);
@@ -76,5 +77,6 @@ int		count_collectibles(char **map);
 void	free_all_and_exit(t_game *my_game, int **p_position);
 
 void	ft_perror(char	*error_string, char	**map, char	*content, int fd);
+void	print_map(char **map);
 
 #endif
