@@ -6,7 +6,7 @@
 /*   By: sabderra <sabderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:48:45 by sabderra          #+#    #+#             */
-/*   Updated: 2025/04/03 20:48:46 by sabderra         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:07:14 by sabderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,21 @@ void	check_file_name(char	*file_name)
 
 int	map_len_for_malloc(char *path_name)
 {
-	int	fd;
-	int	line;
+	int		fd;
+	int		line;
+	char	*s;
 
 	fd = open(path_name, O_RDONLY);
 	if (fd == -1)
 		ft_perror("Error\nCannot open file\n", NULL, NULL, 0);
 	line = 0;
-	while (get_next_line(fd))
+	s = get_next_line(fd);
+	while (s)
+	{
+		free(s);
 		line++;
+		s = get_next_line(fd);
+	}
 	close(fd);
 	return (line);
 }
