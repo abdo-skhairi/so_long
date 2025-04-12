@@ -75,7 +75,22 @@ C Language
 MLX42
 
 Makefile
+```
 
+---
 
-📜 License
-This project is part of the 42 curriculum and was developed for educational purposes.
+## 🙌 Final Words
+
+**so_long** was a fun and challenging project that helped me dive deeper into C programming, graphics rendering with MLX42, and game logic design. It’s a great introduction to building something visual from scratch and understanding low-level mechanics behind a simple 2D game.
+
+If you have any feedback, suggestions, or just want to connect—feel free to reach out!
+
+## 📬 Contact Me
+
+- 📧 **Email:** skhairi.abderahmane@gmail.com  
+- 📸 **Instagram:** [@abdo.skh](https://instagram.com/abdo.skh)
+
+---
+
+Let me know if you want a version in French or Arabic too!
+
