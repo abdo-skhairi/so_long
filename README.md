@@ -92,5 +92,3 @@ If you have any feedback, suggestions, or just want to connect—feel free to re
 
 ---
 
-Let me know if you want a version in French or Arabic too!
-
