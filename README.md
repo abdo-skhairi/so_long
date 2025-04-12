@@ -2,6 +2,13 @@
 
 A simple 2D game built in C using the new version of the MLX42 graphics library.
 
+
+## 📸 Screenshots
+
+![Game Preview](https://github.com/abdo-skhairi/so_long/blob/main/game_image.png?raw=true)
+
+
+
 ## 🧠 About the Project
 
 **so_long** is a small tile-based game where the player moves through a map, collects all the coins (💰), and heads to the exit (🚪). The game is part of the 42 school curriculum and helps reinforce understanding of parsing, basic game mechanics, memory management, and rendering using MLX42.
@@ -68,6 +75,7 @@ C Language
 MLX42
 
 Makefile
+
 
 📜 License
 This project is part of the 42 curriculum and was developed for educational purposes.
